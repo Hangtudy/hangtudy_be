@@ -38,3 +38,35 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### Logs ###
+*.log
+
+### OS specific ###
+.DS_Store
+Thumbs.db
+
+### Application ###
+application-*.yml
+!application.yml
+*.properties
+
+### Database ###
+*.db
+*.sql
+*.sqlite
+*.h2.db
+*.mv.db
+*.trace.db
+
+### Generated files ###
+*.hprof
+*.pyc
+*.class
+target/
+
+### Temp files ###
+*.tmp
+*.temp
+*.swp
+*~
