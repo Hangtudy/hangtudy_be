@@ -21,7 +21,6 @@ data class HealthCheckResponse(
 @RequestMapping(path = ["v1/api/health"])
 @Tag(name = "Health", description = "시스템 상태 확인 API")
 class HealthController {
-
     @Operation(summary = "시스템 상태 확인", description = "시스템의 현재 상태 정보를 반환합니다")
     @ApiResponse(
         responseCode = "200",
