@@ -1,0 +1,9 @@
+package com.hangtudy.app.interfaces.api.v1.exception
+
+import org.springframework.boot.logging.LogLevel
+
+open class ApiException(
+    exceptionCode: ExceptionCode,
+    private val logLevel: LogLevel,
+    private val data: Any? = null
+) : RuntimeException(exceptionCode.message)
