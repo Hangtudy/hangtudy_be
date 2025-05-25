@@ -5,7 +5,6 @@ import com.hangtudy.app.domain.Tarot.Activity
 import com.hangtudy.app.domain.Tarot.ActivityRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 @Service
 class TarotService(
@@ -20,29 +19,28 @@ class TarotService(
         userContent: String,
         resultContent: String
     ) {
-        val nowUtc = LocalDateTime.now()
-        val nowKst = nowUtc.plusHours(9)
+        runCatching {
+            // JSON 파싱 시도
+            val parsedResult = runCatching {
+                objectMapper.readValue(resultContent, Activity.TarotResult::class.java)
+            }.onFailure { e ->
+                logger.error("JSON 파싱 실패: ${e.message}", e)
+            }.getOrNull()
 
-        // JSON 파싱 시도
-        val parsedResult = try {
-            objectMapper.readValue(resultContent, Activity.TarotResult::class.java)
-        } catch (e: Exception) {
-            logger.error(e.printStackTrace().toString())
-            null
+            // Activity 생성
+            val activity = Activity.create(
+                category = category,
+                ipAddress = userIp,
+                userContent = userContent,
+                resultContent = resultContent,
+                resultData = parsedResult
+            )
+
+            // 저장
+            activityRepository.save(activity)
+        }.onFailure { e ->
+            logger.error("addTarot 전체 처리 실패: ${e.message}", e)
+            throw e
         }
-
-        val activity = Activity(
-            category = category.trim(),
-            ipAddress = userIp.trim(),
-            userContent = userContent.trim(),
-            resultContent = resultContent.trim(),
-            resultData = parsedResult,
-            createdAt = nowUtc,
-            updatedAt = nowUtc,
-            createdAtKst = nowKst,
-            updatedAtKst = nowKst
-        )
-
-        activityRepository.save(activity)
     }
 }

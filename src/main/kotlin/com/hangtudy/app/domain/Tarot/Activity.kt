@@ -20,10 +20,10 @@ data class Activity(
     val userContent: String,
 
     @Field("result_content")
-    val resultContent: String, // 원본 JSON 문자열
+    val resultContent: String,
 
     @Field("result_data")
-    val resultData: TarotResult? = null, // 파싱된 타로 결과
+    val resultData: TarotResult? = null,
 
     @Field("created_at")
     val createdAt: LocalDateTime,
@@ -37,6 +37,31 @@ data class Activity(
     @Field("updated_at_kst")
     val updatedAtKst: LocalDateTime
 ) {
+    companion object {
+        fun create(
+            category: String,
+            ipAddress: String,
+            userContent: String,
+            resultContent: String,
+            resultData: TarotResult? = null
+        ): Activity {
+            val nowUtc = LocalDateTime.now()
+            val nowKst = nowUtc.plusHours(9)
+            
+            return Activity(
+                category = category.trim(),
+                ipAddress = ipAddress.trim(),
+                userContent = userContent.trim(),
+                resultContent = resultContent.trim(),
+                resultData = resultData,
+                createdAt = nowUtc,
+                updatedAt = nowUtc,
+                createdAtKst = nowKst,
+                updatedAtKst = nowKst
+            )
+        }
+    }
+    
     data class TarotResult(
         @Field("cards")
         val cards: List<TarotCard>,
