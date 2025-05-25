@@ -15,9 +15,14 @@ data class AddTarotReq(
     @field:Size(max = 200, message = "질문은 200자 이하로 입력해주세요.")
     @Schema(description = "사용자가 작성한 내용", example = "올해 연애운이 궁금합니다.")
     val userContent: String,
-    
+
     @field:NotBlank(message = "결과 내용은 필수입니다.")
     @field:Size(max = 5000, message = "결과 내용은 5000자 이하로 입력해주세요.")
     @Schema(description = "타로 결과 내용", example = "좋은 만남이 기다리고 있습니다.")
-    val resultContent: String
+    val resultContent: String,
+
+    @field:NotBlank(message = "IP 주소는 필수입니다.")
+    @field:Size(max = 200, message = "ip 200자 이하로 입력해주세요.")
+    @Schema(description = "유저의 아이피", example = "127.0.0.1")
+    val userIp: String,
 )
