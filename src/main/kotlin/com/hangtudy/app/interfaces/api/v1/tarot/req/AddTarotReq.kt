@@ -9,7 +9,7 @@ data class AddTarotReq(
     @Schema(description = "타로 카테고리", example = "연애운")
     val category: String,
 
-    @field:NotBlank(message = "주소 정보는 필수입니다.")
+    @field:NotBlank(message = "IP 주소는 필수입니다.")
     @Schema(description = "유저의 아이피", example = "127.0.0.1")
     val userIp: String,
 

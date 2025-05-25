@@ -20,7 +20,10 @@ data class Activity(
     val userContent: String,
 
     @Field("result_content")
-    val resultContent: String,
+    val resultContent: String, // 원본 JSON 문자열
+
+    @Field("result_data")
+    val resultData: TarotResult? = null, // 파싱된 타로 결과
 
     @Field("created_at")
     val createdAt: LocalDateTime,
@@ -33,4 +36,29 @@ data class Activity(
 
     @Field("updated_at_kst")
     val updatedAtKst: LocalDateTime
-)
+) {
+    data class TarotResult(
+        @Field("cards")
+        val cards: List<TarotCard>,
+        
+        @Field("interpretation")
+        val interpretation: String,
+        
+        @Field("timestamp")
+        val timestamp: String
+    )
+
+    data class TarotCard(
+        @Field("name")
+        val name: String,
+        
+        @Field("nameKr")
+        val nameKr: String,
+        
+        @Field("reversed")
+        val reversed: Boolean,
+        
+        @Field("interpretation")
+        val interpretation: String
+    )
+}
