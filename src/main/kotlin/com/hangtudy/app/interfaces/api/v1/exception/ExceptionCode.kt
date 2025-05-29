@@ -7,4 +7,5 @@ enum class ExceptionCode(
     val message: String,
     val httpStatus: HttpStatus
 ) {
+    VALIDATION_ERROR("VALIDATION_ERROR", "Validation error occurred", HttpStatus.BAD_REQUEST)
 }

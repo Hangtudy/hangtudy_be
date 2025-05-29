@@ -1,0 +1,36 @@
+### 사용자 등록 성공 테스트
+# 모든 필드를 포함한 사용자 등록 요청
+POST http://localhost:8080/v1/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123",
+  "name": "홍길동",
+  "profilePictureUrl": "https://example.com/profile.jpg"
+}
+
+### 중복 이메일 검증 오류 테스트
+# 이미 등록된 이메일로 가입 시도 시 오류 발생
+POST http://localhost:8080/v1/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "duplicate@example.com",
+  "password": "securePassword123",
+  "name": "김철수",
+  "profilePictureUrl": "https://example.com/profile.jpg"
+}
+
+### 비밀번호 유효성 검사 테스트
+# 짧은 비밀번호로 가입 시도 시 오류 발생
+POST http://localhost:8080/v1/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user3@example.com",
+  "password": "short",
+  "name": "박지민"
+}
+
+###
