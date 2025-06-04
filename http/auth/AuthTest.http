@@ -1,0 +1,83 @@
+### 사용자 등록 성공 테스트
+# 모든 필드를 포함한 사용자 등록 요청
+POST http://localhost:8080/v1/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123",
+  "name": "홍길동",
+  "profilePictureUrl": "https://example.com/profile.jpg"
+}
+
+### 중복 이메일 검증 오류 테스트
+# 이미 등록된 이메일로 가입 시도 시 오류 발생
+POST http://localhost:8080/v1/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "duplicate@example.com",
+  "password": "securePassword123",
+  "name": "김철수",
+  "profilePictureUrl": "https://example.com/profile.jpg"
+}
+
+### 비밀번호 유효성 검사 테스트
+# 짧은 비밀번호로 가입 시도 시 오류 발생
+POST http://localhost:8080/v1/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user3@example.com",
+  "password": "short",
+  "name": "박지민"
+}
+
+### 사용자 로그인 성공 테스트
+# 유효한 이메일과 비밀번호로 로그인
+POST http://localhost:8080/v1/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}
+
+### 로그인 실패 테스트 - 잘못된 이메일
+# 등록되지 않은 이메일로 로그인 시도
+POST http://localhost:8080/v1/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "invalid@example.com",
+  "password": "securePassword123"
+}
+
+### 로그인 실패 테스트 - 잘못된 비밀번호
+# 잘못된 비밀번호로 로그인 시도
+POST http://localhost:8080/v1/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "wrongpassword"
+}
+
+### 토큰 갱신 성공 테스트
+# 유효한 리프레시 토큰으로 액세스 토큰 갱신
+POST http://localhost:8080/v1/api/auth/refresh
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyX2lkIiwidHlwZSI6InJlZnJlc2giLCJpYXQiOjE3MzU2NzMyMDAsImV4cCI6MTczNjI3ODAwMH0.valid_refresh_token
+
+### 토큰 갱신 실패 테스트 - 잘못된 토큰
+# 잘못된 리프레시 토큰으로 갱신 시도
+POST http://localhost:8080/v1/api/auth/refresh
+Content-Type: application/json
+Authorization: Bearer invalid_refresh_token
+
+### 토큰 갱신 실패 테스트 - Authorization 헤더 누락
+# Authorization 헤더 없이 토큰 갱신 시도
+POST http://localhost:8080/v1/api/auth/refresh
+Content-Type: application/json
+
+###
