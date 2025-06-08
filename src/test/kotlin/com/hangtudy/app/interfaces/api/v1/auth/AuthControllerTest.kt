@@ -1,7 +1,7 @@
 package com.hangtudy.app.interfaces.api.v1.auth
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.hangtudy.app.interfaces.api.v1.exception.ExceptionCode
+import com.hangtudy.app.interfaces.api.exception.ExceptionCode
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested

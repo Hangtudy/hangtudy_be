@@ -1,6 +1,6 @@
 package com.hangtudy.app.interfaces.api.v1.auth
 
-import com.hangtudy.app.interfaces.api.v1.exception.ExceptionCode
+import com.hangtudy.app.interfaces.api.exception.ExceptionCode
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
