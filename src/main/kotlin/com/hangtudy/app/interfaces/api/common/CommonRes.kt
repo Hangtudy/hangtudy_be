@@ -1,7 +1,7 @@
-package com.hangtudy.app.interfaces.api.v1.common
+package com.hangtudy.app.interfaces.api.common
 
-import com.hangtudy.app.interfaces.api.v1.exception.ExceptionCode
-import com.hangtudy.app.interfaces.api.v1.exception.ExceptionMessage
+import com.hangtudy.app.interfaces.api.exception.ExceptionCode
+import com.hangtudy.app.interfaces.api.exception.ExceptionMessage
 import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.http.HttpStatus
 

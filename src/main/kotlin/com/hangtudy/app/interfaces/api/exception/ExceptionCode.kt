@@ -1,4 +1,4 @@
-package com.hangtudy.app.interfaces.api.v1.exception
+package com.hangtudy.app.interfaces.api.exception
 
 import org.springframework.http.HttpStatus
 
